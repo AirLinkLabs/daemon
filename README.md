@@ -1,4 +1,4 @@
-# Air Daemon (Aird)
+# Air Daemon 
 
 ## Overview
 Air Daemon is the daemon for the Air Panel.
@@ -26,7 +26,7 @@ The daemon runs as a background service, interfacing with the Air Panel for oper
 Contributions to enhance the functionality or performance of the Air Daemon are encouraged. Please submit pull requests for any enhancements.
 
 ## License
-(c) 2024 Meesam contributors. This software is licensed under the MIT License.
+(c) 2024 Meesam and contributors. This software is licensed under the MIT License.
 
 
 ## Credits
