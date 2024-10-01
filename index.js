@@ -1,18 +1,20 @@
 /*
- *           __                          __      __
- *     _____/ /____  ______  ____  _____/ /_____/ /
- *    / ___/ //_/ / / / __ \/ __ \/ ___/ __/ __  / 
- *   (__  ) ,< / /_/ / /_/ / /_/ / /  / /_/ /_/ /  
- *  /____/_/|_|\__, / .___/\____/_/   \__/\__,_/   
- *            /____/_/                        
+/*         _        _____                                   
+     /\   (_)      |  __ \                                  
+    /  \   _ _ __  | |  | | __ _  ___ _ __ ___   ___  _ __  
+   / /\ \ | | '__| | |  | |/ _` |/ _ \ '_ ` _ \ / _ \| '_ \ 
+  / ____ \| | |    | |__| | (_| |  __/ | | | | | (_) | | | |
+ /_/    \_\_|_|    |_____/ \__,_|\___|_| |_| |_|\___/|_| |_|
+                                                            
+                                                                 
  * 
- *  Skyport Daemon v0.2.2 (Firestorm)
- *  (c) 2024 Matt James and contributers
+ *  Air Daemon v0.1-beta1 
+ *  (c) 2024 Meesam and contributers
  * 
 */
 
 /**
- * @fileoverview Main entry file for the Skyport Daemon. This module sets up an
+ * @fileoverview Main entry file for the Air Daemon. This module sets up an
  * Express server integrated with Docker for container management and WebSocket for real-time communication.
  * It includes routes for instance management, deployment, and power control, as well as WebSocket endpoints
  * for real-time container stats and logs. Authentication is enforced using basic authentication.
@@ -184,7 +186,7 @@ function initializeWebSocketServer(server) {
         function authenticateWebSocket(ws, req, password, callback) {
             if (password === config.key) {
                 log.info('successful authentication on ws');
-                ws.send(`\r\n\u001b[33m[skyportd] \x1b[0mconnected!\r\n`);
+                ws.send(`\r\n\u001b[33m[DAEMON] \x1b[0mconnected!\r\n`);
                 const urlParts = req.url.split('/');
                 const containerId = urlParts[2];
                 const volumeId = urlParts[3] || 0;
@@ -238,8 +240,8 @@ function initializeWebSocketServer(server) {
                 if (isAuthenticated) {
                     const command = JSON.parse(msg).command;
                     
-                    if (command === "skyportCredits") {
-                        ws.send("privt00, am5z, achul123, thatdevwolfy");
+                    if (command === "AirCredits") {
+                        ws.send("ma4z, infiniteesky, tfcprivt");
                     } else if (command) {
                         executeCommand(ws, container, command);
                     }
@@ -328,17 +330,17 @@ function initializeWebSocketServer(server) {
             };
         
             if (!actionMap[action]) {
-                ws.send(`\r\n\u001b[33m[skyportd] \x1b[0Invalid action: ${action}\r\n`);
+                ws.send(`\r\n\u001b[33m[DAEMON] \x1b[0Invalid action: ${action}\r\n`);
                 return;
             }
         
-            ws.send(`\r\n\u001b[33m[skyportd] \x1b[0mWorking on ${action}...\r\n`);
+            ws.send(`\r\n\u001b[33m[DAEMON] \x1b[0mWorking on ${action}...\r\n`);
         
             try {
                 await actionMap[action]();
             } catch (err) {
                 console.error(`Error performing ${action} action:`, err);
-                ws.send(`\r\n\u001b[33m[skyportd] \x1b[0Action failed: ${err.message}\r\n`);
+                ws.send(`\r\n\u001b[33m[DAEMON] \x1b[0Action failed: ${err.message}\r\n`);
             }
         }
 
@@ -416,7 +418,7 @@ app.get('/', async (req, res) => {
         res.json(response); // the point of this? just use the ws - yeah conn to the ws on nodes page and send that json over ws
     } catch (error) {
         console.error('Error fetching Docker status:', error);
-        res.status(500).json({ error: 'Docker is not running - skyportd will not function properly.' });
+        res.status(500).json({ error: 'Docker is not running - Air DAEMON will not function properly.' });
     }
 });
 
@@ -433,6 +435,6 @@ app.use((err, req, res, next) => {
 const port = config.port;
 setTimeout(function (){
   server.listen(port, () => {
-    log.info('skyportd is listening on port ' + port);
+    log.info('AirDaemon is listening on port ' + port);
   });
 }, 2000);

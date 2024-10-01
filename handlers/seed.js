@@ -11,7 +11,7 @@ const docker = new Docker({ socketPath: process.env.dockerSocket });
 async function seed() {
     try {
         createVolumesFolder();
-        log.init('retrieving image list from skyport...');
+        log.init('retrieving image list from AirLink Panel...');
         const response = await axios.get(config.remote + '/images/list');
 
         const images = response.data;

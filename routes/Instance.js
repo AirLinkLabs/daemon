@@ -1,5 +1,5 @@
 /**
- * @fileoverview Provides routes for managing Docker container instances within the Skyport Daemon.
+ * @fileoverview Provides routes for managing Docker container instances within the Air Daemon.
  * This module allows for listing all Docker containers and retrieving detailed information about
  * a specific container. Utilizes Dockerode to interact with the Docker engine via its API, handling
  * container queries and detailed inspections.

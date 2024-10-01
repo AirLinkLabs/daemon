@@ -1,5 +1,5 @@
 {
-  "_note1": "WARNING: You do not need to touch the following values. Skyport Daemon will automatically set them.",
+  "_note1": "WARNING: You do not need to touch the following values. Air Daemon will automatically set them.",
   "remote": "http://localhost:3001",
   "key": "5d93ecb0c812b368b5b09eb9aba35ff08a7a71461bebedbc2837abd03b733be6",
   "_note3": "Other configuration options below. Hostname must be set for FTP to return the correct info.",
